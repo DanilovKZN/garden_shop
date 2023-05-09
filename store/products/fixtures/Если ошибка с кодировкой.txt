@@ -1,0 +1,5 @@
+Дамп делать так:
+
+python -Xutf8 manage.py dumpdata products.ProductCategory -o categories.json
+
+python -Xutf8 manage.py dumpdata products.ProductCategory -o goods.json

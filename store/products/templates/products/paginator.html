@@ -1,0 +1,32 @@
+{% if products.has_other_pages %}
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+            <li class="page-item {% if not products.has_previous %} disabled {% endif %}">
+                <a class="page-link"
+                    href="{% if products.has_previous %} ?page={{products.previous_page_number }} {% else %} # {% endif %}"
+                        tabindex="-1" aria-disabled="true">
+                            Предыдущая
+                </a>
+                </li>
+                    {% for page in products.paginator.page_range %}
+                        {% if products.number == page %}
+                            <li class="page-item">
+                                <a class="page-link">
+                                    {{ page }}
+                                </a>
+                            </li>
+                        {% else %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ page }}">{{ page }}</a>
+                            </li>
+                        {% endif %}
+                        {% endfor %}
+                            <li class="page-item {% if not products.has_next %} disabled {% endif %}">
+                                <a class="page-link"
+                                    href="{% if products.has_next %} ?page={{ products.next_page_number }} {% else %} # {% endif %}">
+                                    Следующая
+                                </a>
+                            </li>
+        </ul>
+    </nav>
+{% endif %}
