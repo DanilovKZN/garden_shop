@@ -1,18 +1,28 @@
-from django.contrib import admin
-from django.conf.urls.static import static
 from django.conf import settings
-from django.urls import path, include
+from django.conf.urls.static import static
+from django.contrib import admin
+from django.urls import include, path
+from rest_framework.authtoken import views
 
-from products.views import index
+from orders.views import stripe_webhook_view
+from products.views import IndexView
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', index, name='index'),
+    path('', IndexView.as_view(), name='index'),
     path('products/', include('products.urls', namespace='products')),
     path('users/', include('users.urls', namespace='users')),
+    path('orders/', include('orders.urls', namespace='orders')),
+    path('accounts/', include('allauth.urls')),
+    # для теста вебхука stripe
+    path('webhook/stripe/', stripe_webhook_view, name='stripe_webhook'),
+    path('api/', include('api.urls', namespace='api')),
+    path('api-token-auth/', views.obtain_auth_token),
 ]
 
 
 if settings.DEBUG:
+    # Добавляем toolbar
+    urlpatterns.append(path('__debug__/', include('debug_toolbar.urls'))),
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

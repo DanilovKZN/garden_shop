@@ -1,62 +1,48 @@
-from django.shortcuts import render, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
-from django.core.paginator import Paginator
+from django.shortcuts import HttpResponseRedirect
+from django.views.generic.base import TemplateView
+from django.views.generic.list import ListView
 
-from products.models import Product, ProductCategory, Basket
-from users.models import User
-
-
-POSTS_IN_PAGE_FOR_PAGINATOR = 3
-
-
-def paginator(request, post_list):
-    """Пагинатор."""
-    paginator = Paginator(post_list, POSTS_IN_PAGE_FOR_PAGINATOR)
-    page_number = request.GET.get('page', 1)
-    page_object = paginator.get_page(page_number)
-    return page_object
+from common.mixins import TitleMixin
+from products.models import Basket, Product, ProductCategory
 
 
-def index(request):
-    """Просто отображение домашней страницы."""
-    return render(request, 'products/index.html')
+POSTS_IN_PAGE_FOR_PAGINATOR = 6
 
 
-def products(request, category_id=None):
-    """Страница продукции, а так же вывод в категориях."""
-    category = ProductCategory.objects.all()
+class IndexView(TitleMixin, TemplateView):
+    """Классовое представление главной страницы."""
+    template_name = 'products/index.html'
+    title = '6 соток'
 
-    if category_id:
-        products = Product.objects.filter(category_id=category_id)
-    else:
-        products = Product.objects.all()
 
-    products_paginator = paginator(request, products)
-    context = {
-        "title": "Store - каталог",
-        "categories": category,
-        "products": products_paginator
-    }
-    return render(request, 'products/products.html', context)
+class ProductsListView(TitleMixin, ListView):
+    """Вывод продукции магазина. Если пришёл category_id,
+    то выводим только товары выбранной категории."""
+    model = Product
+    title = '6 соток - каталог'
+    template_name = 'products/products.html'
+    paginate_by = POSTS_IN_PAGE_FOR_PAGINATOR
+
+    def get_queryset(self):
+        queryset = super(ProductsListView, self).get_queryset()
+        # достаем из kwargs наш id категории
+        category_id = self.kwargs.get('category_id')
+        if category_id:
+            queryset = queryset.filter(category_id=category_id)
+        return queryset
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(ProductsListView, self).get_context_data()
+        context['categories'] = ProductCategory.objects.all()
+        return context
 
 
 # Декоратор для проверки, что пользователь в системе
 @login_required
 def add_basket(request, product_id):
     """Добавление товара в корзину."""
-    product = Product.objects.get(id=product_id)
-    basket = Basket.objects.filter(user=request.user, product=product)
-
-    if not basket.exists():
-        Basket.objects.create(
-            user=request.user,
-            product=product,
-            quantity=1
-        )
-    else:
-        basket = basket.first()
-        basket.quantity += 1
-        basket.save()
+    Basket.create_or_update(product_id, request.user)
     # Возврат на страницу, где находится пользователь
     return HttpResponseRedirect(request.META['HTTP_REFERER'])
 
@@ -66,5 +52,4 @@ def basket_remove(request, basket_id):
     """Удаление товара из корзины."""
     basket = Basket.objects.get(id=basket_id)
     basket.delete()
-
     return HttpResponseRedirect(request.META['HTTP_REFERER'])

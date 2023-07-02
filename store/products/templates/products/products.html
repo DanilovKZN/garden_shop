@@ -1,5 +1,5 @@
 {% extends 'products/base.html' %}
-{% load static %}
+{% load static humanize %}
 
 {% block css %}
     <link href="{% static 'vendor/css/products.css' %}" rel="stylesheet">
@@ -9,7 +9,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-3">
-                <h1 class="my-4">Store</h1>
+                <h1 class="my-4">Категории товаров</h1>
                 <div class="list-group">
                     {% for category in categories %}
                         <a href="{% url 'products:category' category.id %}" class="list-group-item">
@@ -41,6 +41,10 @@
                             <img class="d-block img-fluid" src="/static/vendor/img/slides/slide-3.jpg"
                                 alt="Third slide">
                         </div>
+                        <div class="carousel-item">
+                            <img class="d-block img-fluid" src="/static/vendor/img/slides/slide-4.jpg"
+                                alt="Fourth slide">
+                        </div>
                     </div>
                     <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -54,7 +58,7 @@
 
                 <div class="row">
 
-                    {% for product in products %}
+                    {% for product in object_list %}
                         <div class="col-lg-4 col-md-6 mb-4">
                             <div class="card h-100">
                                 <a href="#">
@@ -66,7 +70,7 @@
                                     <h4 class="card-title">
                                         <a href="#">{{ product.name }}</a>
                                     </h4>
-                                    <h5>{{ product.price }} руб.</h5>
+                                    <h5>{{ product.price|intcomma }} руб.</h5>
                                     <p class="card-text">{{ product.description }}</p>
                                 </div>
                                 <div class="card-footer text-center">
@@ -80,7 +84,9 @@
                     {% endfor %}
 
                 </div>
-                {% include 'products/paginator.html' %}
+                {% if is_paginated %}
+                    {% include 'products/paginator.html' %}
+                {% endif %}    
             </div>
         </div>
     </div>

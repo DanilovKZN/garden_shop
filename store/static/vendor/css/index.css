@@ -2,7 +2,7 @@ body {
     background: url("../img/wallpaper.jpg") no-repeat center top fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
-    background-size: cover;
+    background-size: contain;
     -o-background-size: cover;
     padding-top: 56px;
 }

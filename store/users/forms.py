@@ -1,7 +1,19 @@
-from django import forms
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UserChangeForm
+import uuid
+from datetime import timedelta
 
-from users.models import User
+from django import forms
+from django.contrib.auth.forms import (
+    AuthenticationForm,
+    UserChangeForm,
+    UserCreationForm
+)
+from django.utils.timezone import now
+
+from users.models import EmailVerification, User
+
+
+# Время жизни ссылки в часах
+LIVE_TIME_UUID = 48
 
 
 class UserLoginForm(AuthenticationForm):
@@ -57,6 +69,22 @@ class UserRegistrationForm(UserCreationForm):
             'password1',
             'password2'
         )
+
+    def save(self, commit=True):
+        """Переопределяем сохранение пользователя для
+        добавления функции отправки сообщения на email."""
+        user = super(UserRegistrationForm, self).save(commit=True)
+        expiration = now() + timedelta(hours=LIVE_TIME_UUID)  # Получение даты сгорания ссылки
+        # uuid.uuid4() формирует уникальный код
+        record = EmailVerification.objects.create(
+            code=uuid.uuid4(),
+            user=user,
+            expiration=expiration
+        )
+        # Метод send_verification_email мы определили в models.py
+        record.send_verification_email()
+
+        return user
 
 
 class UserProfileForm(UserChangeForm):

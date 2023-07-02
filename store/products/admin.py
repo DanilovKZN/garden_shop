@@ -1,15 +1,14 @@
 from django.contrib import admin
 
-from products.models import ProductCategory, Product, Basket
+from products.models import Basket, Product, ProductCategory
 
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
     """Админка продуукции."""
     list_display = ('name', 'price', 'quantity', 'category')
-    fields = ('image', 'name', 'description', ('price', 'quantity'), 'category') # Кортеж в кортеже для расположения на одной строке
-    # Поле только для чтения
-    # readonly_fields = ()
+    # Кортеж в кортеже для расположения на одной строке
+    fields = ('image', 'name', 'description', ('price', 'quantity'), 'stripe_product_price_id', 'category')
     search_fields = ('name',)
     ordering = ('name',)
 

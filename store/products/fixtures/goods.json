@@ -1,1 +1,74 @@
-[{"model": "products.product", "pk": 1, "fields": {"name": "Худи черного цвета с монограммами Adidas", "description": "Мягкая ткань - залог комфорта по жизни!", "price": "9600.00", "quantity": 5, "image": "products_images/Adidas-hoodie.png", "category": 1}}, {"model": "products.product", "pk": 2, "fields": {"name": "Чёрные туфли на платформе Dr.Martens", "description": "Твой стиль - твои правила.", "price": "6200.00", "quantity": 19, "image": "products_images/Black-Dr-Martens-shoes.png", "category": 2}}, {"model": "products.product", "pk": 3, "fields": {"name": "Рюкзак Nike", "description": "Городской рюкзак для твоих приключений.", "price": "7400.00", "quantity": 5, "image": "products_images/Black-Nike-Heritage-backpack.png", "category": 3}}, {"model": "products.product", "pk": 4, "fields": {"name": "Пуховик North Face", "description": "Твой зимний компаньон.", "price": "9000.00", "quantity": 5, "image": "products_images/Blue-jacket-The-North-Face.png", "category": 1}}, {"model": "products.product", "pk": 5, "fields": {"name": "Спортивные штаны Asos", "description": "Хочу и ношу.", "price": "3000.00", "quantity": 10, "image": "products_images/Dark-blue-wide-leg-ASOs-DESIGN-trousers.png", "category": 1}}, {"model": "products.product", "pk": 6, "fields": {"name": "Коричневый свитер Asos", "description": "Хоть на тебе, хоть в рюкзаке.", "price": "5000.00", "quantity": 3, "image": "products_images/Brown-sports-oversized-top-ASOS-DESIGN.png", "category": 1}}]
+[
+{
+    "model": "products.product",
+    "pk": 1,
+    "fields": {
+        "name": "РҐСѓРґРё С‡РµСЂРЅРѕРіРѕ С†РІРµС‚Р° СЃ РјРѕРЅРѕРіСЂР°РјРјР°РјРё Adidas",
+        "description": "РњСЏРіРєР°СЏ С‚РєР°РЅСЊ - Р·Р°Р»РѕРі РєРѕРјС„РѕСЂС‚Р° РїРѕ Р¶РёР·РЅРё!",
+        "price": "9600.00",
+        "quantity": 5,
+        "image": "products_images/Adidas-hoodie.png",
+        "category": 1
+    }
+},
+{
+    "model": "products.product",
+    "pk": 2,
+    "fields": {
+        "name": "Р§С‘СЂРЅС‹Рµ С‚СѓС„Р»Рё РЅР° РїР»Р°С‚С„РѕСЂРјРµ Dr.Martens",
+        "description": "РўРІРѕР№ СЃС‚РёР»СЊ - С‚РІРѕРё РїСЂР°РІРёР»Р°.",
+        "price": "6200.00",
+        "quantity": 19,
+        "image": "products_images/Black-Dr-Martens-shoes.png",
+        "category": 2
+    }
+},
+{
+    "model": "products.product",
+    "pk": 3,
+    "fields": {
+        "name": "Р СЋРєР·Р°Рє Nike",
+        "description": "Р“РѕСЂРѕРґСЃРєРѕР№ СЂСЋРєР·Р°Рє РґР»СЏ С‚РІРѕРёС… РїСЂРёРєР»СЋС‡РµРЅРёР№.",
+        "price": "7400.00",
+        "quantity": 5,
+        "image": "products_images/Black-Nike-Heritage-backpack.png",
+        "category": 3
+    }
+},
+{
+    "model": "products.product",
+    "pk": 4,
+    "fields": {
+        "name": "РџСѓС…РѕРІРёРє North Face",
+        "description": "РўРІРѕР№ Р·РёРјРЅРёР№ РєРѕРјРїР°РЅСЊРѕРЅ.",
+        "price": "9000.00",
+        "quantity": 5,
+        "image": "products_images/Blue-jacket-The-North-Face.png",
+        "category": 1
+    }
+},
+{
+    "model": "products.product",
+    "pk": 5,
+    "fields": {
+        "name": "РЎРїРѕСЂС‚РёРІРЅС‹Рµ С€С‚Р°РЅС‹ Asos",
+        "description": "РҐРѕС‡Сѓ Рё РЅРѕС€Сѓ.",
+        "price": "3000.00",
+        "quantity": 10,
+        "image": "products_images/Dark-blue-wide-leg-ASOs-DESIGN-trousers.png",
+        "category": 1
+    }
+},
+{
+    "model": "products.product",
+    "pk": 6,
+    "fields": {
+        "name": "РљРѕСЂРёС‡РЅРµРІС‹Р№ СЃРІРёС‚РµСЂ Asos",
+        "description": "РҐРѕС‚СЊ РЅР° С‚РµР±Рµ, С…РѕС‚СЊ РІ СЂСЋРєР·Р°РєРµ.",
+        "price": "5000.00",
+        "quantity": 3,
+        "image": "products_images/Brown-sports-oversized-top-ASOS-DESIGN.png",
+        "category": 1
+    }
+}
+]
