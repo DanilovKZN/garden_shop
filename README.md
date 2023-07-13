@@ -49,13 +49,13 @@ REDIS_PORT = 'Порт Redis'
 python3 manage.py runserver
 ```
 ### Технологии
-
+```
 Python 3.9.6
 Django 3.2.15
 Stripe
 Redis
 PostgreSQL
 Celery
-
+```
 ### Авторы
 Николай Данилов
