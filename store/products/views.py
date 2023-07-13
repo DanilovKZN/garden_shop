@@ -7,6 +7,7 @@ from common.mixins import TitleMixin
 from products.models import Basket, Product, ProductCategory
 
 
+# Количество отображаемых товаров на странице
 POSTS_IN_PAGE_FOR_PAGINATOR = 6
 
 

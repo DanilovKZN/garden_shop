@@ -23,14 +23,13 @@ class UserLoginView(TitleMixin, LoginView):
 class RegistrationCreateView(SuccessMessageMixin, TitleMixin, CreateView):
     """Классовое представление регистрации пользователя."""
     model = User
-    form_class = UserRegistrationForm   # Используется ссылка на форму, все данные идут уже под капотом
+    form_class = UserRegistrationForm
     title = 'Регистрация'
     template_name = 'users/registration.html'
     success_url = reverse_lazy('users:login_enter')
     success_message = SUCCESS_MSG_REGISTR
 
 
-# @login_required теперь используется в urls
 class ProfileUpdateView(TitleMixin, UpdateView):
     """Классовое представление личного кабинета пользователя
     с возможностью редактирования данных и отображением корзины."""

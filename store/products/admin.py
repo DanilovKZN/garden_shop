@@ -5,7 +5,7 @@ from products.models import Basket, Product, ProductCategory
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    """Админка продуукции."""
+    """Админка продукции."""
     list_display = ('name', 'price', 'quantity', 'category')
     # Кортеж в кортеже для расположения на одной строке
     fields = ('image', 'name', 'description', ('price', 'quantity'), 'stripe_product_price_id', 'category')
@@ -15,7 +15,7 @@ class ProductAdmin(admin.ModelAdmin):
 
 @admin.register(ProductCategory)
 class ProductCategoryAdmin(admin.ModelAdmin):
-    """Админка продуукции."""
+    """Админка категории продукции."""
     list_display = ('name',)
     fields = ('name', 'description')
     search_fields = ('name',)

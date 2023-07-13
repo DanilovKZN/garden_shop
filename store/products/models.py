@@ -1,6 +1,7 @@
+import stripe
+
 from typing import Iterable, Optional
 
-import stripe
 from django.conf import settings
 from django.db import models
 
@@ -157,7 +158,6 @@ class Basket(models.Model):
         return basket_item
 
     @classmethod
-    # Переписываем метод класса
     def create_or_update(cls, product_id, user):
         """Создание или обновление корзины. Реализован в модели,
         чтобы не дублировать одинаковую логику,
